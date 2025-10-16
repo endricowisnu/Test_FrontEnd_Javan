@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@keyframes pulse-blue-soft {
+  0% { filter: drop-shadow(0 0 0.3em #3b82f640); }
+  50% { filter: drop-shadow(0 0 0.6em #3b82f680); }
+  100% { filter: drop-shadow(0 0 0.3em #3b82f640); }
+}
+
+@keyframes pulse-blue-strong {
+  0% { filter: drop-shadow(0 0 0.3em #3b82f6a0); }
+  50% { filter: drop-shadow(0 0 0.9em #3b82f6ff); }
+  100% { filter: drop-shadow(0 0 0.3em #3b82f6a0); }
+}
+
+@keyframes pulse-pink-soft {
+  0% { filter: drop-shadow(0 0 0.2em #ec489940); }
+  50% { filter: drop-shadow(0 0 0.6em #ec489980); }
+  100% { filter: drop-shadow(0 0 0.2em #ec489940); }
+}
+
+@keyframes pulse-pink-strong {
+  0% { filter: drop-shadow(0 0 0.3em #ec4899a0); }
+  50% { filter: drop-shadow(0 0 0.9em #ec4899ff); }
+  100% { filter: drop-shadow(0 0 0.3em #ec4899a0); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.glow-male {
+  animation: pulse-blue-soft 3s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
+}
+.glow-male:hover {
+  animation: pulse-blue-strong 1.5s ease-in-out infinite;
+}
+
+.glow-female {
+  animation: pulse-pink-soft 3s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
+}
+.glow-female:hover {
+  animation: pulse-pink-strong 1.5s ease-in-out infinite;
+}
+
+
+.image-wrapper {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 9999px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-wrapper img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.08);
+}
+
+.info-card {
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.info-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.info-card.bg-purple-50:hover {
+  background-color: #f3e8ff; 
+}
+
+.info-card.bg-blue-50:hover {
+  background-color: #e0f2fe;
+}
+
+.info-card.bg-pink-50:hover {
+  background-color: #fce7f3;
+}
+
+.info-card:hover svg {
+  transform: rotate(-10deg) scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.7s ease-in-out forwards;
+}
