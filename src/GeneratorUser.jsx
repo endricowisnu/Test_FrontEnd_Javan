@@ -53,7 +53,7 @@ export const GeneratorUser = () => {
   const registered = new Date(user.registered.date);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100 px-4 py-4 sm:px-6 lg:px-8">
       <Toaster richColors />
 
       <div className="text-center mb-8 mt-8">
