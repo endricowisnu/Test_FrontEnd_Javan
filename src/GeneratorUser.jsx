@@ -5,40 +5,36 @@ import { Toaster, toast } from "sonner";
 export const GeneratorUser = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [fadeKey, setFadeKey] = useState(0); 
+  const [fadeKey, setFadeKey] = useState(0);
 
   const fetchUser = async () => {
-  // tampilkan toast hitam sementara data dimuat
-  const toastId = toast("Loading new profile...", {
-    duration: Infinity, // biar tidak otomatis hilang
-    style: {
-      backgroundColor: "#000",
-      color: "#fff",
-      fontWeight: "500",
-      borderRadius: "8px",
-      padding: "10px 16px",
-    },
-  });
-
-  setLoading(true);
-  try {
-    const res = await fetch("https://randomuser.me/api/");
-    const data = await res.json();
-    setUser(data.results[0]);
-    setFadeKey((prev) => prev + 1);
-
-    // hilangkan toast loading, lalu tampilkan sukses
-    toast.dismiss(toastId);
-    toast.success("Profile loaded!", {
-      duration: 2000,
+    const toastId = toast("Loading new profile...", {
+      duration: Infinity,
+      style: {
+        backgroundColor: "#000",
+        color: "#fff",
+        fontWeight: "500",
+        borderRadius: "8px",
+        padding: "10px 16px",
+      },
     });
-  } catch (error) {
-    toast.dismiss(toastId);
-    toast.error("Failed to load profile!", error);
-  } finally {
-    setLoading(false);
-  } 
-};
+
+    setLoading(true);
+    try {
+      const res = await fetch("https://randomuser.me/api/");
+      const data = await res.json();
+      setUser(data.results[0]);
+      setFadeKey((prev) => prev + 1);
+
+      toast.dismiss(toastId);
+      toast.success("Profile loaded!", { duration: 2000 });
+    } catch (error) {
+      toast.dismiss(toastId);
+      toast.error("Failed to load profile!", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchUser();
@@ -56,25 +52,27 @@ export const GeneratorUser = () => {
   const birthday = new Date(user.dob.date);
   const registered = new Date(user.registered.date);
 
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100 px-4 sm:px-6 lg:px-8">
       <Toaster richColors />
 
+      {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
-           Random Profile Generator 
+        <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
+          Random Profile Generator
         </h1>
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-600 mt-2 text-sm sm:text-base">
           Discover random people from around the world
         </p>
       </div>
 
+      {/* Card */}
       <div
         key={fadeKey}
-        className="bg-white rounded-3xl shadow-xl p-8 flex w-[1000px] items-center gap-10 transition-all duration-700 ease-in-out opacity-0 animate-fadeIn"
+        className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 flex flex-col md:flex-row w-full max-w-4xl items-center gap-8 md:gap-10 transition-all duration-700 ease-in-out opacity-0 animate-fadeIn"
       >
-        <div className="flex flex-col items-center w-1/3">
+        {/* Left: Image */}
+        <div className="flex flex-col items-center md:w-1/3 text-center">
           <div
             className={`image-wrapper ${
               user.gender === "male" ? "glow-male" : "glow-female"
@@ -83,11 +81,11 @@ export const GeneratorUser = () => {
             <img
               src={user.picture.large}
               alt="Profile"
-              className="h-44 w-44 rounded-full object-cover"
+              className="h-32 w-32 sm:h-40 sm:w-40 md:h-44 md:w-44 rounded-full object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
 
-          <h2 className="text-2xl font-semibold mt-4 capitalize text-gray-800">
+          <h2 className="text-xl sm:text-2xl font-semibold mt-4 capitalize text-gray-800">
             {user.name.first} {user.name.last}
           </h2>
           <p className="text-gray-500 capitalize">{user.gender}</p>
@@ -97,18 +95,18 @@ export const GeneratorUser = () => {
             <img
               src={`https://flagcdn.com/w40/${user.nat.toLowerCase()}.png`}
               alt={user.location.country}
-              className="w-6 h-4 rounded shadow-sm transition-transform duration-300 hover:scale-110"
+              className="w-5 h-3 rounded shadow-sm transition-transform duration-300 hover:scale-110"
             />
           </p>
         </div>
 
-        <div className="flex-1 space-y-4">
-          {/* Email */}
+        {/* Right: Info */}
+        <div className="flex-1 space-y-4 w-full">
           <div className="info-card flex items-start gap-3 bg-purple-50 p-4 rounded-xl hover:scale-[1.02] transition-all duration-300 hover:shadow-md">
             <Mail className="text-purple-500 w-6 h-6 mt-1" />
             <div>
               <p className="text-sm text-gray-500">EMAIL</p>
-              <p className="font-medium">{user.email}</p>
+              <p className="font-medium text-sm sm:text-base break-words">{user.email}</p>
             </div>
           </div>
 
@@ -125,7 +123,7 @@ export const GeneratorUser = () => {
             <MapPin className="text-pink-500 w-6 h-6 mt-1" />
             <div>
               <p className="text-sm text-gray-500">ADDRESS</p>
-              <p className="font-medium">
+              <p className="font-medium text-sm sm:text-base break-words">
                 {user.location.street.number} {user.location.street.name},{" "}
                 {user.location.city}, {user.location.state},{" "}
                 {user.location.country}
@@ -136,7 +134,7 @@ export const GeneratorUser = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <div className="flex-1 bg-blue-50 rounded-xl p-4 text-center hover:scale-[1.03] transition-all duration-300 hover:shadow-md">
               <Calendar className="w-6 h-6 text-blue-500 mx-auto" />
               <p className="text-gray-600 text-sm mt-2">BIRTHDAY</p>
@@ -164,12 +162,13 @@ export const GeneratorUser = () => {
         </div>
       </div>
 
+      {/* Button */}
       <button
         onClick={fetchUser}
-        className="mt-8 bg-gradient-to-r from-blue-500 to-pink-500 text-white px-8 py-3 rounded-xl shadow-md hover:opacity-90 transition-all"
+        className="mt-8 bg-gradient-to-r from-blue-500 to-pink-500 text-white px-6 sm:px-8 py-3 rounded-xl shadow-md hover:opacity-90 transition-all text-sm sm:text-base"
       >
         🔁 Generate New User
       </button>
     </div>
   );
-}
+};
