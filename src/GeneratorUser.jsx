@@ -56,7 +56,7 @@ export const GeneratorUser = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100 px-4 py-4 sm:px-6 lg:px-8">
       <Toaster richColors />
 
-      <div className="text-center mb-8 mt-8">
+      <div className="text-center mb-8 mt-4">
         <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
           Random Profile Generator
         </h1>
