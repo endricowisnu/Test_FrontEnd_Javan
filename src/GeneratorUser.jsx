@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Mail, Phone, MapPin, Calendar, UserPlus } from "lucide-react";
+import { Mail, Phone, MapPin, Calendar, UserPlus, RefreshCw } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
 export const GeneratorUser = () => {
@@ -53,11 +53,10 @@ export const GeneratorUser = () => {
   const registered = new Date(user.registered.date);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-blue-100 px-4 py-12 sm:px-6 lg:px-8">
       <Toaster richColors />
 
-      {/* Header */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 mt-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
           Random Profile Generator
         </h1>
@@ -66,12 +65,10 @@ export const GeneratorUser = () => {
         </p>
       </div>
 
-      {/* Card */}
       <div
         key={fadeKey}
-        className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 flex flex-col md:flex-row w-full max-w-4xl items-center gap-8 md:gap-10 transition-all duration-700 ease-in-out opacity-0 animate-fadeIn"
+        className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 flex flex-col md:flex-row w-[90%] max-w-[1000px] items-center gap-8 md:gap-10 transition-all duration-700 ease-in-out opacity-0 animate-fadeIn"
       >
-        {/* Left: Image */}
         <div className="flex flex-col items-center md:w-1/3 text-center">
           <div
             className={`image-wrapper ${
@@ -99,8 +96,6 @@ export const GeneratorUser = () => {
             />
           </p>
         </div>
-
-        {/* Right: Info */}
         <div className="flex-1 space-y-4 w-full">
           <div className="info-card flex items-start gap-3 bg-purple-50 p-4 rounded-xl hover:scale-[1.02] transition-all duration-300 hover:shadow-md">
             <Mail className="text-purple-500 w-6 h-6 mt-1" />
@@ -162,13 +157,14 @@ export const GeneratorUser = () => {
         </div>
       </div>
 
-      {/* Button */}
       <button
         onClick={fetchUser}
-        className="mt-8 bg-gradient-to-r from-blue-500 to-pink-500 text-white px-6 sm:px-8 py-3 rounded-xl shadow-md hover:opacity-90 transition-all text-sm sm:text-base"
+        className="mt-8 mb-8 bg-gradient-to-r from-blue-500 to-pink-500 text-white px-6 sm:px-8 py-3 rounded-xl shadow-md hover:opacity-90 transition-all text-sm sm:text-base"
       >
-        🔁 Generate New User
+        <RefreshCw className="w-5 h-5 inline-block mr-2 -mt-1" />
+         Generate New User
       </button>
     </div>
   );
 };
+
